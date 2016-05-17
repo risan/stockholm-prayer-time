@@ -1,0 +1,18 @@
+{
+    "name": "stockholm-prayer-time",
+    "productName": "stockholm-prayer-time",
+    "version": "0.1.0",
+    "description": "Stockholm prayer time",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "dependencies": {
+        "cheerio": "^0.20.0",
+        "request": "^2.72.0"
+    },
+    "devDependencies": {
+        "electron-prebuilt": "^1.0.1",
+        "menubar": "^4.1.1"
+    }
+}

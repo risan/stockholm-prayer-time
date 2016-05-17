@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>Example App</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <style type="text/css">
+            table thead tr th {
+                font-size: 13px;
+                font-weight: 400;
+                text-transform: uppercase;
+                text-align: center;
+                color: #C5B358;
+                background-color: #056F00;
+            }
+
+            table tbody tr td {
+                width: 50%;
+            }
+
+            .name {
+                text-align: left;
+            }
+
+            .time {
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th colspan="2">Stockholm Prayer Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="name">Fajr</td>
+                    <td class="time" id="fajr">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="name">Shuruk</td>
+                    <td class="time" id="shuruk">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="name">Dhohr</td>
+                    <td class="time" id="dhohr">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="name">Asr</td>
+                    <td class="time" id="asr">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="name">Magrib</td>
+                    <td class="time" id="magrib">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="name">Isha</td>
+                    <td class="time" id="isha">
+                        <i class="fa fa-spinner fa-spin"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script>
+            const request = require('request');
+            const cheerio = require('cheerio');
+
+            request('http://www.islamiskaforbundet.se/bonetider/', function (error, response, body) {
+              if (!error && response.statusCode == 200) {
+                const $ = cheerio.load(body);
+                const $cols = $('table tr.today td');
+                const fajr = $cols.eq(1).text();
+                const shuruk = $cols.eq(2).text();
+                const dhohr = $cols.eq(3).text();
+                const asr = $cols.eq(4).text();
+                const magrib = $cols.eq(5).text();
+                const isha = $cols.eq(6).text();
+
+                document.getElementById('fajr').innerHTML = fajr;
+                document.getElementById('shuruk').innerHTML = shuruk;
+                document.getElementById('dhohr').innerHTML = dhohr;
+                document.getElementById('asr').innerHTML = asr;
+                document.getElementById('magrib').innerHTML = magrib;
+                document.getElementById('isha').innerHTML = isha;
+              }
+            });
+        </script>
+    </body>
+</html>
